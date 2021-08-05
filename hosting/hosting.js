@@ -38,22 +38,38 @@ const imageUpload = multer({
     }
 })
 
-app.post('/upload', imageUpload.single('image'), (req, res) => {
-    console.log(req.file)
+// models
+
+const Property = require('./models/property.model') 
+
+app.post('/upload', imageUpload.single('image'), async (req, res) => {
+
+    const newProperty = new Property({
+        roomTitle: req.body.roomTitle,
+        roomSummary: req.body.roomSummary,
+        totalBedrooms: req.body.totalBedrooms,
+        totalBathrooms: req.body.totalBathrooms,
+        mediaUrl: req.file.path
+    })
+    await newProperty.save()
+                    .then(()=> res.status(200).json( {status:'success', data: newProperty}))
+                    .catch(err=>res.json(err))
+
+    
     res.send(req.file)
+   // req.file.path
 }, (err,req, res, next)=>{
     res.status(400).send({error: err.message})
 })
 
-app.get('/file/:fileName', function (req, res) {
-    // const filePath = './images/image_1628158485879.png'
-    // res.sendFile(filePath);/ const { filename } = req.params;
-    const dirname = path.resolve()
-   
-    const fullfilepath = path.join(dirname, 'images/' + req.params.fileName)
-    re
-    // return res.sendFile(fullfilepath);
+// app.get('/file/:fileName', function (req, res) {
+//     const {fileName}= req.params
+    
+//     const dirname = path.resolve()
 
-})
+//     const fullfilepath = path.join(dirname, 'images/' + fileName)
+ 
+//     return res.sendFile(fullfilepath);
+// })
 
 app.listen(process.env.PORT|| 5200, ()=>console.log(`Server running PORT : 5200`))

@@ -25,6 +25,11 @@ const propertySchema = new Schema({
         type: Number,
         required: true   
     },
+    
+    mediaUrl: {
+        type: String, default: ''
+    },
+    /*
     address:{
         
     },
@@ -69,11 +74,6 @@ const propertySchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Owner'
     },
-
-    mediaUrl: {
-        type: String, default: ''
-    },
-
     location: {
         lat: {
           type: String,
@@ -87,7 +87,7 @@ const propertySchema = new Schema({
     category: {
         type: String,
         default: ''
-    },
+    },*/
     postedAt: {
         type: Date,
         default: Date.now
