@@ -55,21 +55,18 @@ app.post('/upload', imageUpload.single('image'), async (req, res) => {
                     .then(()=> res.status(200).json( {status:'success', data: newProperty}))
                     .catch(err=>res.json(err))
 
-    
-    res.send(req.file)
-   // req.file.path
 }, (err,req, res, next)=>{
     res.status(400).send({error: err.message})
 })
 
-// app.get('/file/:fileName', function (req, res) {
-//     const {fileName}= req.params
+app.get('/file/:fileName', function (req, res) {
+    const {fileName}= req.params
     
-//     const dirname = path.resolve()
+    const dirname = path.resolve()
 
-//     const fullfilepath = path.join(dirname, 'images/' + fileName)
+    const fullfilepath = path.join(dirname, 'images/' + fileName)
  
-//     return res.sendFile(fullfilepath);
-// })
+    return res.sendFile(fullfilepath);
+})
 
 app.listen(process.env.PORT|| 5200, ()=>console.log(`Server running PORT : 5200`))
