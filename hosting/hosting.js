@@ -41,7 +41,7 @@ const imageUpload = multer({
 const mongoose = require("mongoose");
 
 const connectDB = async () => {
-  await mongoose.connect('mongodb://localhost:27017/Auth'/*process.env.DATABASE_CONNECTION*/, {
+  await mongoose.connect('mongodb://localhost:27017/HostingDB'/*process.env.DATABASE_CONNECTION*/, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
@@ -61,28 +61,32 @@ const Property = require('./models/property.model')
 
 
 app.post('/upload', imageUpload.single('image'), async (req, res) => {
+    if(!req.body){
+        res.json({msg: 'Include details'})
+    }
     
-    // const newProperty = new Property({
+    else{
+    const newProperty = new Property({
 
-    //     roomTitle: req.body.roomTitle,
-    //     roomSummary: req.body.roomSummary,
-    //     totalBedrooms: req.body.totalBedrooms,
-    //     totalBathrooms: req.body.totalBathrooms,
-    //     mediaUrl: req.file.path
-    // })
-    res.send(req.file.path)
+        roomTitle: String(req.body.roomTitle),
+        roomSummary: String(req.body.roomSummary),
+        totalBedrooms: String(req.body.totalBedrooms),
+        totalBathrooms: String(req.body.totalBathrooms),
+        mediaUrl: String(req.file.path)
+    })
 
-    // await newProperty.save().then(()=>console.log('success'))
-                    // .then(()=> {
-                    //     return res.status(200).json( {status:'success', data: newProperty})
-                    // }).catch(err=>res.json(err))
-
-}, (err,req, res, next)=>{
-    res.status(400).send({error: err.message})
+    await newProperty.save()
+                        .then(()=> res.status(200).json({sucess: true, data: newProperty}))
+                        .catch(err=>res.json(err))
+    }
 })
 
 
-app.get('/file/:fileName', function (req, res) {
+app.get('/properties', async (req, res) => {
+    await Property.find({}).then(properties=>res.json(properties))
+})
+
+app.get('/image/:fileName', function (req, res) {
     const {fileName}= req.params
     
     const dirname = path.resolve()
