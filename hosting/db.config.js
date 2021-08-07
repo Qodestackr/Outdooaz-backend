@@ -1,10 +1,14 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 
-// connect to mongodb
-mongoose.connect('mongodb://localhost:27017/PropertyHostDB', {useNewUrlParser: true, useUnifiedTopology: true})
-.then(()=>console.log(' db connected '))
-.catch(err=>console.log(' db connection error: ', err))
+const connectDB = async () => {
+  await mongoose.connect('mongodb://localhost:27017/Auth'/*process.env.DATABASE_CONNECTION*/, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: true,
+  });
 
-const connection = mongoose.connection
+  console.log("MongoDB Connected");
+};
 
-module.exports = connection
+module.exports = connectDB;

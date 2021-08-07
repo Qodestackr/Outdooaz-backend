@@ -11,6 +11,7 @@ paypal.configure({
   });
 
   
+app.use(express.static(path.join(__dirname, 'public')));
 // redirect to store when user hits http://localhost:3000
 app.get('/' , (req , res) => {
     res.redirect('/index.html'); 
@@ -70,8 +71,7 @@ var createPay = ( payment ) => {
         }
         }); 
     });
-}	
-
+}
 
 
 // success page 
@@ -90,3 +90,9 @@ app.get('/err' , (req , res) => {
 app.listen( 3000 , () => {
     console.log(' app listening on 3000 '); 
 })
+
+// https://stackoverflow.com/questions/62126349/paypal-integration-with-reactjs-node-js-guidance-on-implementation?rq=1
+// https://www.npmjs.com/package/@paypal/react-paypal-js
+// https://cubettech.com/resources/blog/integrating-paypal-rest-api-with-react-js/
+// https://developer.paypal.com/docs/archive/checkout/how-to/server-integration/
+// https://developer.paypal.com/docs/business/checkout/configure-payments/single-page-app/

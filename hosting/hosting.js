@@ -38,26 +38,49 @@ const imageUpload = multer({
     }
 })
 
+const mongoose = require("mongoose");
+
+const connectDB = async () => {
+  await mongoose.connect('mongodb://localhost:27017/Auth'/*process.env.DATABASE_CONNECTION*/, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: true,
+  });
+
+  console.log("MongoDB Connected");
+};
+
+connectDB()
+
+
+
 // models
 
 const Property = require('./models/property.model') 
 
-app.post('/upload', imageUpload.single('image'), async (req, res) => {
 
-    const newProperty = new Property({
-        roomTitle: req.body.roomTitle,
-        roomSummary: req.body.roomSummary,
-        totalBedrooms: req.body.totalBedrooms,
-        totalBathrooms: req.body.totalBathrooms,
-        mediaUrl: req.file.path
-    })
-    await newProperty.save()
-                    .then(()=> res.status(200).json( {status:'success', data: newProperty}))
-                    .catch(err=>res.json(err))
+app.post('/upload', imageUpload.single('image'), async (req, res) => {
+    
+    // const newProperty = new Property({
+
+    //     roomTitle: req.body.roomTitle,
+    //     roomSummary: req.body.roomSummary,
+    //     totalBedrooms: req.body.totalBedrooms,
+    //     totalBathrooms: req.body.totalBathrooms,
+    //     mediaUrl: req.file.path
+    // })
+    res.send(req.file.path)
+
+    // await newProperty.save().then(()=>console.log('success'))
+                    // .then(()=> {
+                    //     return res.status(200).json( {status:'success', data: newProperty})
+                    // }).catch(err=>res.json(err))
 
 }, (err,req, res, next)=>{
     res.status(400).send({error: err.message})
 })
+
 
 app.get('/file/:fileName', function (req, res) {
     const {fileName}= req.params
