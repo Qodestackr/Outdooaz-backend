@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const connectDB = async () => {
-  await mongoose.connect('mongodb://localhost:27017/Auth'/*process.env.DATABASE_CONNECTION*/, {
+  await mongoose.connect('mongodb://localhost:27017/HostingDB'/*process.env.DATABASE_CONNECTION*/, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,

@@ -1,1 +1,0 @@
-// const Owner = require('../../models/Owner')
