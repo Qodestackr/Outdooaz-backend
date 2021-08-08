@@ -1,0 +1,7 @@
+
+Product service start ampqlib []
+
+User sends a list of product IDs to buy
+
+Create an order with the products with a total value of sum of product prices
+

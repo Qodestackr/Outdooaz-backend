@@ -138,3 +138,15 @@ const sendToken = (user, statusCode, res) => {
   const token = user.getSignedJwtToken();
   res.status(statusCode).json({ sucess: true, token });
 };
+
+exports.getUser = async (req, res, next) => {
+  try {
+    const user = await User.findOne({
+      _id: req.params._id,
+    });
+
+    res.status(200).json({ success: true, data: user });
+  } catch (err) {
+    next(err);
+  }
+}

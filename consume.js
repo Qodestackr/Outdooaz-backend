@@ -8,6 +8,7 @@ async function consume() {
     var q = 'test_queue'
     await conn.createChannel()
     await ch.assertQueue(q, {durable: true})
+    
     await ch.consume(q, function (msg) {
         console.log(msg.content.toString())
         ch.ack(msg)
