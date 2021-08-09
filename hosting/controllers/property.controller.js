@@ -1,4 +1,4 @@
-// const Property = require('../../models/Property')
+const Property = require('../models/property.model')
 
 const addProperty = (req, res) => {
     var description = req.body.description;
@@ -11,7 +11,6 @@ const addProperty = (req, res) => {
             res.redirect('/properties/' + savedProperty.id);
         });
 }
-
 
 const getPropertyByID = (req, res) => {
     var propertyId = req.params.id;
@@ -36,13 +35,13 @@ const editProperty = (req, res) => {
     var propertyId = req.body.propertyId;
 
     Property.findOne({ _id: propertyId })
-        .then(function (property) {
+        .then(property =>{
             property.description = req.body.description
             property.imageUrl = req.body.imageUrl
 
             return property.save()
         })
-        .then(function (updatedProperty) {
+        .then(updatedProperty =>{
             return res.redirect('/properties/' + updatedProperty.id)
         })
 }
@@ -51,15 +50,24 @@ const deleteProperty = (req, res) => {
     var propertyId = req.body.propertyId
 
     Property.findOne({ _id: propertyId })
-        .then(function (property) {
+        .then(property =>{
             property.description = req.body.description
             property.imageUrl = req.body.imageUrl
 
             return property.save()
         })
-        .then(function (updatedProperty) {
+        .then(updatedProperty => {
             return res.redirect('/properties/' + updatedProperty.id)
         })
+}
+
+const bookProperty = (req, res) => {
+    let propertyId = req.body.propertyId
+    Property.findOne({_id: propertyId})
+            .then(property=>{
+                // grab the property details and send to the booking...
+
+            })
 }
 
 module.exports = {addProperty, getPropertyByID, getProperties, editProperty, deleteProperty }

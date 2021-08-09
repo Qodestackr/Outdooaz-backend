@@ -1,6 +1,6 @@
 const mongoose =  require('mongoose')
 
-const {Schema} = mongoose
+const { Schema } = mongoose
 
 const propertySchema = new Schema({
 
@@ -9,30 +9,22 @@ const propertySchema = new Schema({
         default: '',
         required: true
     },
-
-    roomSummary:{
+    description:{
         type: String,
         default: '',
         required: true
     },
-
     totalBedrooms: {
         type: Number,
         required: true
     },
-
     totalBathrooms:{
         type: Number,
         required: true   
     },
-    
     mediaUrl: {
         type: String, default: ''
-    },
-    /*
-    address:{
-        
-    },
+    },/*
     hasKitchen: {
         type: Boolean,
         default: false
@@ -60,7 +52,7 @@ const propertySchema = new Schema({
     hasDryer: {
         type: Boolean,
         default: false
-    },
+    },*/
     price_per_night: {
         type: Boolean,
         default: false
@@ -87,7 +79,7 @@ const propertySchema = new Schema({
     category: {
         type: String,
         default: ''
-    },*/
+    },
     postedAt: {
         type: Date,
         default: Date.now
