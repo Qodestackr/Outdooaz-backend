@@ -89,13 +89,17 @@ module.exports = {
     bookAppointment
 };
 ```
-[more](https://github.com/dfwteinos/Airbnb)
+[more](https://github.com/dfwteinos/Airbnb)_
+
+
 [haha](https://github.com/daltonmenezes/aircnc)
 
 ## consider
-[eg](https://opensourcelibs.com/lib/airbnbapi)
-[eg2](https://dev.to/plazarev/7-promising-hotel-management-booking-apps-built-with-javascript-3h38)
-[boilerplate](https://opensourcelibs.com/lib/react-airbnb-boilerplate)
+[eg](https://opensourcelibs.com/lib/airbnbapi)_
+
+[eg2](https://dev.to/plazarev/7-promising-hotel-management-booking-apps-built-with-javascript-3h38)_
+
+[boilerplate](https://opensourcelibs.com/lib/react-airbnb-boilerplate)_
 
 How can you create a website like Airbnb?
 Before creating your website, you need to know the features that should be available and the tech stack that can be used.
