@@ -5,16 +5,20 @@ User sends a list of product IDs to buy
 
 Create an order with the products with a total value of sum of product prices
 
-[links](https://www.rentallscript.com/airbnb-clone/) 
-[and](https://www.simform.com/how-make-app-like-airbnb/#feat)
+[links](https://www.rentallscript.com/airbnb-clone/)_
+
+[and](https://www.simform.com/how-make-app-like-airbnb/#feat)_
+
 [codementor](https://www.codementor.io/posts/new)
 
 Firebase or Cloud??-->Firebase providing authorization and file storage
 
 [codes](https://github.com/yons101/hotel101-hotel-bookings-laravel-react)
 
-[??](https://js.devexpress.com/Demos/DXHotels/#home)
-[ui](https://www.telerik.com/kendo-react-ui/)
+[??](https://js.devexpress.com/Demos/DXHotels/#home) _
+
+[ui](https://www.telerik.com/kendo-react-ui/)_
+
 [The System To Manage?](https://dhtmlx.com/docs/products/dhtmlxHotelManagement/)
 
 ```js
