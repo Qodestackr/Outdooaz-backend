@@ -26,10 +26,3 @@ async function produce(){
 }
 
 produce()
-
-//https://www.cloudamqp.com/docs/nodejs.html
-// https://api.cloudamqp.com/console/bf0e94e9-8e4b-412c-bce5-1c2da061be00/details
-//https://github.com/squaremo/amqp.node/
-//https://www.cloudamqp.com/blog/part1-rabbitmq-for-beginners-what-is-rabbitmq.html
-//https://www.cloudkarafka.com/
-//https://www.cloudamqp.com/blog/how-to-run-rabbitmq-with-nodejs.html
