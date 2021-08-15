@@ -12,13 +12,16 @@ exports.login = async (req, res, next) => {
     return next(new ErrorResponse("Please provide an email and password", 400));
   }
 
-  try {
     // Check that user exists by email
     const user = await User.findOne({ email }, async(err, user)=>{
-        if (!user) {
-              return next(new ErrorResponse("Invalid credentials", 401));
-           }
-  // Check that password match
+      if (!user) {
+        return next(new ErrorResponse("Invalid credentials", 401));
+      }
+    }).catch(err=> next(err))
+
+   
+
+    // Check that password match
     const isMatch = await user.matchPassword(password);
 
     if (!isMatch) {
@@ -26,13 +29,8 @@ exports.login = async (req, res, next) => {
     }
 
     sendToken(user, 200, res);
-  } catch (err) {
-    next(err);
-  }
-        
-})
-
-};
+  
+}
 
 // @desc    Register user
 exports.register = async (req, res, next) => {
