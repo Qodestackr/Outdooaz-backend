@@ -6,6 +6,7 @@ const sendEmail = require("../utils/sendEmail")
 // @desc    Login user
 exports.login = async (req, res, next) => {
   const { email, password } = req.body
+  console.log(email, password)
 
   // Check if email and password is provided
   if (!email || !password) {
