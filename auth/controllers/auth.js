@@ -17,10 +17,10 @@ exports.login = async (req, res, next) => {
         return next(new ErrorResponse("Error Occured"))
       }
 
-      if (!user) {
-        return next(new ErrorResponse("Invalid credentials", 401))
-      }
-
+      // if (!user) {
+      //   return next(new ErrorResponse("Invalid credentials", 401))
+      // }
+      
       // Check that password match
     const isMatch = await user.matchPassword(password)
 
@@ -28,22 +28,23 @@ exports.login = async (req, res, next) => {
       return next(new ErrorResponse("Invalid credentials", 401))
     }
     sendToken(user, 200, res) 
-    
+
     }).catch(err=> next(err))
 }
 
 // @desc    Register user
 exports.register = async (req, res, next) => {
-//  const { Firstname, Lastname, email, password } = req.body;
+ const { Firstname, Lastname, email, password } = req.body;
 
-  try {
-    const user = new User(req.body);
-
-    sendToken(user, 200, res);
-  } catch (err) {
-    next(err);
-  }
-};
+  
+    const user = new User({
+      Firstname,
+      Lastname,
+      email,
+      password
+    });
+    await user.save().then(()=>sendToken(user, 200, res)).catch(err=>next(err))
+}
 
 // @desc    Forgot Password Initialization
 exports.forgotPassword = async (req, res, next) => {
