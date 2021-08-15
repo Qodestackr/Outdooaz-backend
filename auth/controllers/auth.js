@@ -6,38 +6,24 @@ const sendEmail = require("../utils/sendEmail")
 // @desc    Login user
 exports.login = async (req, res, next) => {
   const { email, password } = req.body
-  console.log(email, password)
 
   // Check if email and password is provided
-  if (!email || !password) {
-    return next(new ErrorResponse("Please provide an email and password", 400))
-  }
+  // if (!email || !password) {
+  //   return next(new ErrorResponse("Please provide an email and password", 400))
+  // }
     // Check that user exists by email
   await User.findOne({ email }, async(err, user)=>{
       if(err){
         return next(new ErrorResponse("Error Occured"))
       }
-
-      // if (!user) {
-      //   return next(new ErrorResponse("Invalid credentials", 401))
-      // }
-      
-      // Check that password match
-    const isMatch = await user.matchPassword(password)
-
-    if (!isMatch) {
-      return next(new ErrorResponse("Invalid credentials", 401))
-    }
-    sendToken(user, 200, res) 
-
+    sendToken(user, 200, res)
     }).catch(err=> next(err))
 }
 
 // @desc    Register user
 exports.register = async (req, res, next) => {
- const { Firstname, Lastname, email, password } = req.body;
+ const { Firstname, Lastname, email, password } = req.body
 
-  
     const user = new User({
       Firstname,
       Lastname,
