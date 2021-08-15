@@ -1,6 +1,7 @@
 const crypto = require("crypto")
 const ErrorResponse = require("../utils/errorResponse")
 const User = require("../models/User")
+const jwt = require("jsonwebtoken")
 const sendEmail = require("../utils/sendEmail")
 
 // @desc    Login user
@@ -33,14 +34,16 @@ exports.register = async (req, res, next) => {
     await user.save().then(()=>sendToken(user, 200, res)).catch(err=>next(err))
 }
 
-const checkCurrentUser = async (req, res, next) => {
-
-  if (req.body.token) {
-    res.status(200).json({ success: true, data: "Token Provided" })
-  }
-
-  res.status(401).json({ success: false, message: "Unauthorized" });
+exports.checkCurrentUser = async (req, res, next) => {
+  // grab token from req.body
+  const token = req.body.token
+  // grab user from token
+  const decoded = jwt.verify(token, process.env.JWT_SECRET)
+  await User.findOne({ _id: decoded.id }, (err, user) => {
+    
+  }))
 }
+
 
 // @desc    Forgot Password Initialization
 exports.forgotPassword = async (req, res, next) => {
