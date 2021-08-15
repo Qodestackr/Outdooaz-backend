@@ -1,35 +1,35 @@
-const crypto = require("crypto");
-const ErrorResponse = require("../utils/errorResponse");
-const User = require("../models/User");
-const sendEmail = require("../utils/sendEmail");
+const crypto = require("crypto")
+const ErrorResponse = require("../utils/errorResponse")
+const User = require("../models/User")
+const sendEmail = require("../utils/sendEmail")
 
 // @desc    Login user
 exports.login = async (req, res, next) => {
-  const { email, password } = req.body;
+  const { email, password } = req.body
 
   // Check if email and password is provided
   if (!email || !password) {
-    return next(new ErrorResponse("Please provide an email and password", 400));
+    return next(new ErrorResponse("Please provide an email and password", 400))
   }
-
     // Check that user exists by email
-    const user = await User.findOne({ email }, async(err, user)=>{
-      if (!user) {
-        return next(new ErrorResponse("Invalid credentials", 401));
+  await User.findOne({ email }, async(err, user)=>{
+      if(err){
+        return next(new ErrorResponse("Error Occured"))
       }
-    }).catch(err=> next(err))
 
-   
+      if (!user) {
+        return next(new ErrorResponse("Invalid credentials", 401))
+      }
 
-    // Check that password match
-    const isMatch = await user.matchPassword(password);
+      // Check that password match
+    const isMatch = await user.matchPassword(password)
 
     if (!isMatch) {
-      return next(new ErrorResponse("Invalid credentials", 401));
+      return next(new ErrorResponse("Invalid credentials", 401))
     }
-
-    sendToken(user, 200, res);
-  
+    sendToken(user, 200, res) 
+    
+    }).catch(err=> next(err))
 }
 
 // @desc    Register user
