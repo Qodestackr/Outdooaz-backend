@@ -14,13 +14,11 @@ exports.login = async (req, res, next) => {
 
   try {
     // Check that user exists by email
-    const user = await User.findOne({ email }).select("+password");
-
-    if (!user) {
-      return next(new ErrorResponse("Invalid credentials", 401));
-    }
-
-    // Check that password match
+    const user = await User.findOne({ email }, async(err, user)=>{
+        if (!user) {
+              return next(new ErrorResponse("Invalid credentials", 401));
+           }
+  // Check that password match
     const isMatch = await user.matchPassword(password);
 
     if (!isMatch) {
@@ -31,18 +29,17 @@ exports.login = async (req, res, next) => {
   } catch (err) {
     next(err);
   }
+        
+})
+
 };
 
 // @desc    Register user
 exports.register = async (req, res, next) => {
-  const { username, email, password } = req.body;
+//  const { Firstname, Lastname, email, password } = req.body;
 
   try {
-    const user = await User.create({
-      username,
-      email,
-      password,
-    });
+    const user = new User(req.body);
 
     sendToken(user, 200, res);
   } catch (err) {

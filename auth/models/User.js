@@ -4,10 +4,17 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const UserSchema = new mongoose.Schema({
-  username: {
+
+  firstname: {
     type: String,
-    required: [true, "Please provide username"],
+    required: [true, "Please provide Firstname"],
   },
+
+  lastname: {
+    type: String,
+    required: [true, "Please provide Lastname"],
+  },
+
   email: {
     type: String,
     required: [true, "Please provide email address"],
@@ -17,28 +24,32 @@ const UserSchema = new mongoose.Schema({
       "Please provide a valid email",
     ],
   },
+
   password: {
     type: String,
     required: [true, "Please add a password"],
     minlength: 6,
     select: false,
   },
+
   role: {
     type: String,
   },
+
   resetPasswordToken: String,
   resetPasswordExpire: Date,
-});
+})
 
 UserSchema.pre("save", async function (next) {
   if (!this.isModified("password")) {
-    next();
+    next()
   }
 
-  const salt = await bcrypt.genSalt(10);
-  this.password = await bcrypt.hash(this.password, salt);
-  next();
-});
+  const salt = await bcrypt.genSalt(10)
+  this.password = await bcrypt.hash(this.password, salt)
+  next()
+
+})
 
 UserSchema.methods.matchPassword = async function (password) {
   return await bcrypt.compare(password, this.password);
@@ -62,9 +73,9 @@ UserSchema.methods.getResetPasswordToken = function () {
   // Set token expire date
   this.resetPasswordExpire = Date.now() + 10 * (60 * 1000); // Ten Minutes
 
-  return resetToken;
-};
+  return resetToken
+}
 
-const User = mongoose.model("User", UserSchema);
+const User = mongoose.model("User", UserSchema)
 
-module.exports = User;
+module.exports = User
