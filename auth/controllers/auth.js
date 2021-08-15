@@ -39,9 +39,20 @@ exports.checkCurrentUser = async (req, res, next) => {
   const token = req.body.token
   // grab user from token
   const decoded = jwt.verify(token, process.env.JWT_SECRET)
-  await User.findOne({ _id: decoded.id }, (err, user) => {
-    
-  }))
+  console.log(token)
+  
+  return res.json(decoded.id)
+ 
+  // await User.findOne({ _id: decoded.id }, (err, user) => {
+  //   if (err) {
+  //     return next(err)
+  //   }
+  //   if (!user) {
+  //     return next(new ErrorResponse("User not found", 404))
+  //   }
+  //   req.user = user
+  //   next()
+  // }
 }
 
 
