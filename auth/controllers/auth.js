@@ -33,6 +33,15 @@ exports.register = async (req, res, next) => {
     await user.save().then(()=>sendToken(user, 200, res)).catch(err=>next(err))
 }
 
+const checkCurrentUser = async (req, res, next) => {
+
+  if (req.body.token) {
+    res.status(200).json({ success: true, data: "Token Provided" })
+  }
+
+  res.status(401).json({ success: false, message: "Unauthorized" });
+}
+
 // @desc    Forgot Password Initialization
 exports.forgotPassword = async (req, res, next) => {
   // Send Email to email provided but first check if user exists
