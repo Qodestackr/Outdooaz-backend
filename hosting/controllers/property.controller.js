@@ -16,23 +16,17 @@ const getPropertyByID = (req, res) => {
     var propertyId = req.params.id;
     Property.findOne({ _id: propertyId }).then(function (property) {
         res.render('properties/show', { property: property });
-    });
+    })
 }
 
 const getProperties = (req, res) => {
     Property.find().then(function (properties) {
-        res.render('properties/index', { properties: properties });
-    });
-}
-
-const getProperties = (req, res) => {
-    Property.find().then(function (properties) {
-        res.render('properties/new');
-    });
+        res.render('properties/new')
+    })
 }
 
 const editProperty = (req, res) => {
-    var propertyId = req.body.propertyId;
+    var propertyId = req.body.propertyId
 
     Property.findOne({ _id: propertyId })
         .then(property =>{

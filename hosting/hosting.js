@@ -81,7 +81,6 @@ app.post('/upload', imageUpload.single('image'), async (req, res) => {
     }
 })
 
-
 app.get('/properties', async (req, res) => {
     await Property.find({}).then(properties=>res.json(properties))
 })
