@@ -95,4 +95,10 @@ app.get('/image/:fileName', function (req, res) {
     return res.sendFile(fullfilepath);
 })
 
+// get property by id
+app.get('/property/:id', async (req, res) => {
+    const id = req.params.id
+    Property.findById(id).then(property=>res.json(property)).catch(err=>res.json(err))
+})
+
 app.listen(process.env.PORT|| 5200, ()=>console.log(`Server running PORT : 5200`))
