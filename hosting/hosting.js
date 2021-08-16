@@ -85,7 +85,7 @@ app.get('/properties', async (req, res) => {
     await Property.find({}).then(properties=>res.json(properties))
 })
 
-app.get('/image/:fileName', function (req, res) {
+app.get('/images/:fileName', function (req, res) {
     const {fileName}= req.params
     
     const dirname = path.resolve()
