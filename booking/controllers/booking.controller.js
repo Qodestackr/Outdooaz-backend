@@ -16,8 +16,22 @@ const bookProperty = async(req, res) =>{
 }
 
 const getMyBookings = async(req, res) =>{
-    let bookings = await Booking.find({_id: req.params.id})
-    res.json(bookings)
+    // console.log(req.params.bookingId)
+    await Booking.find({_id: req.params.bookingId}, (err, bookings) => {
+        if (err) {
+            res.status(500).json({msg:err})
+        }
+       return res.status(200).json(bookings)
+    })
 }
 
-module.exports = {bookProperty, getMyBookings}
+const bookings = async(req, res) =>{
+    await Booking.find({}, (err, bookings) => {
+        if (err) {
+            res.status(500).json({msg:err})
+        }
+       return res.status(200).json(bookings)
+    })
+}
+
+module.exports = {bookProperty, getMyBookings, bookings}
