@@ -10,7 +10,6 @@ app.use(express.urlencoded({extended: false}))
 
 app.use('/', require('./routes/index'))
 
-
 // db
 const connection = require('./config/db.config')
 connection.once('open', () => console.log('Connected to database instance'))

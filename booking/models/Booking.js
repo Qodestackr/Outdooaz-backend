@@ -35,8 +35,3 @@ module.exports = mongoose.model('Booking', bookingSchema)
 // bookingId , propertyId , userId,
 // Transactions?? isRefund??
 // totalPrice  = siteFees , discount, actual(initialFee)
-
-// Has many photos [ppty]
-// Has many [slots]
-// Belongs to [owner]
-// Booked by [client]

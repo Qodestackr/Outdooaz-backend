@@ -4,12 +4,15 @@ const Review = require('../models/Review')
 
 const bookProperty = async(req, res) =>{
     let isPaid = true;
-    let property = {
-        name: "house1",
-        desc: "house1 desc...",
-        price: 1000,
-    }
-    res.json({msg:'successfully booked',data:property})  
+   const {body} = req
+   const newBooking = new Booking(body)
+   await newBooking.save()
+                .then(booking => {
+                    res.status(201).json({msg:'successfully booked',data:body})  
+
+                }).catch(err => {
+                    res.status(500).json({msg:err})
+                })
 }
 
 const getMyBookings = async(req, res) =>{
