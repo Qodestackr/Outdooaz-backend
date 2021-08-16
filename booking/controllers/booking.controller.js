@@ -3,7 +3,7 @@ const Booking = require('../models/Booking')
 const Review = require('../models/Review')
 
 const bookProperty = async(req, res) =>{
-    let isPaid = true;
+    let isPaid = true
    const {body} = req
    const newBooking = new Booking(body)
    await newBooking.save()

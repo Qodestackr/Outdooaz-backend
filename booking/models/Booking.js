@@ -31,7 +31,3 @@ const bookingSchema = new Schema({
 })
 
 module.exports = mongoose.model('Booking', bookingSchema)
-
-// bookingId , propertyId , userId,
-// Transactions?? isRefund??
-// totalPrice  = siteFees , discount, actual(initialFee)
