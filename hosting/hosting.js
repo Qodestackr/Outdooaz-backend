@@ -96,6 +96,7 @@ app.get('/images/:fileName', function (req, res) {
 })
 
 // get property by id
+
 app.get('/property/:id', async (req, res) => {
     const id = req.params.id
     Property.findById(id).then(property=>res.json(property)).catch(err=>res.json(err))

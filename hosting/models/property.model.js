@@ -16,11 +16,11 @@ const propertySchema = new Schema({
     },
     totalBedrooms: {
         type: Number,
-        required: true
+        default: 2
     },
     totalBathrooms:{
         type: Number,
-        required: true   
+        default: 2  
     },
     mediaUrl: {
         type: String, default: ''
@@ -54,31 +54,12 @@ const propertySchema = new Schema({
         default: false
     },*/
     price_per_night: {
-        type: Boolean,
-        default: false
+        type: Number,
+        default: 75
     },
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
-    },
-
-    ownerId:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Owner'
-    },
-    location: {
-        lat: {
-          type: String,
-          default: ''
-        },
-        lng: {
-          type: String,
-          default: ''
-        }
-      },
-    category: {
-        type: String,
-        default: ''
     },
     postedAt: {
         type: Date,

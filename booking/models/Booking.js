@@ -18,7 +18,7 @@ const bookingSchema = new Schema({
     status: { type: String, default: 'pending' },
     totalPrice: {
         type: Number,
-        required: true
+        default: 75
     },
     property: {
         type: mongoose.Schema.Types.ObjectId,

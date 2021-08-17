@@ -43,16 +43,10 @@ const editProperty = (req, res) => {
 const deleteProperty = (req, res) => {
     var propertyId = req.body.propertyId
 
-    Property.findOne({ _id: propertyId })
-        .then(property =>{
-            property.description = req.body.description
-            property.imageUrl = req.body.imageUrl
-
-            return property.save()
-        })
-        .then(updatedProperty => {
-            return res.redirect('/properties/' + updatedProperty.id)
-        })
+    Property.findOneAndDelete({_id: propertyId}, (err, property)=>{
+        if(err){ return res.status(400).json({msg: "Error!"})}
+        return res.status(200).json({msg: "Delete successful"})
+})
 }
 
 const bookProperty = (req, res) => {
@@ -61,7 +55,7 @@ const bookProperty = (req, res) => {
             .then(property=>{
                 // grab the property details and send to the booking...
 
-            })
+    })
 }
 
 module.exports = {addProperty, getPropertyByID, getProperties, editProperty, deleteProperty }

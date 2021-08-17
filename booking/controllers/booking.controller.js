@@ -1,6 +1,6 @@
 const Booking = require('../models/Booking')
 // const Property = require('../models/Property')
-const Review = require('../models/Review')
+//const Review = require('../models/Review')
 
 const bookProperty = async(req, res) =>{
     let isPaid = true
